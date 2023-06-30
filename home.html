@@ -38,11 +38,11 @@
         <p style="cursor: pointer; display: inline-block; margin: 13px 0 13px 20px;" id="trangchu">
             Trang chủ
         </p>
-        <p style="cursor: pointer; display: inline-block;margin: 13px 0 13px 20px;" id="dulieu">
-            Dữ liệu
-        </p>
         <p style="cursor: pointer; display: inline-block;margin: 13px 0 13px 20px;" id="giamsat">
             Giám sát
+        </p>
+        <p style="cursor: pointer; display: inline-block;margin: 13px 0 13px 20px;" id="dulieu">
+            Dữ liệu
         </p>
         <p style="cursor: pointer; display: inline-block;margin: 13px 0 13px 20px;" id="dangxuat">
             Đăng xuất
@@ -114,6 +114,43 @@
                     <p  id="spreading_factor" style="display: inline-block;"></p>
                 </div>
             </div>
+
+            <p style="margin: 0; padding: 10px 5px; background-color: #b0f2ff; border-bottom: 1px solid black;">Điểm thu:</p>
+            <div  style="padding: 10px 10px 20px 10px; border-bottom: 1px solid black;">
+                <div>  
+                    <p style="display: inline-block; font-weight: bold;">DO chuẩn:</p>
+                    <input id="inputDO" type="text" style="width: 40px">
+                    <button id="bDO">OK</button>
+                </div>
+                <div>
+                    <p style="display: inline-block; font-weight: bold;">ORP chuẩn:</p>
+                    <input id="inputORP" type="text" style="width: 40px">
+                    <button id="bORP">OK</button>
+                </div>
+                <div>
+                    <p style="display: inline-block; font-weight: bold;">T chuẩn:</p>
+                    <input id="inputT" type="text" style="width: 40px">
+                    <button id="bT">OK</button>
+                </div>
+            </div>
+            <script>
+                const bDO = document.querySelector("#bDO");
+                bDO.addEventListener("click", (e) => {
+                e.preventDefault();
+                    
+                });
+                const bORP = document.querySelector("#bORP");
+                bORP.addEventListener("click", (e) => {
+                e.preventDefault();
+                    window.location.href = "login.html";
+                });
+                const bT = document.querySelector("#bT");
+                bT.addEventListener("click", (e) => {
+                e.preventDefault();
+                    window.location.href = "login.html";
+                });
+            </script>
+            
         </div>
     
         <div>
