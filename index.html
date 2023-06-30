@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giam sat chat luong nuoc</title>
+    <link rel="stylesheet" href="./assets/fonts/themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css">
+    <script src="Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+</head>
+
+<body style="margin: 0;">
+   
+<div>
+    <div
+        style="
+            background-color: #20bbda; 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 0 50px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        ">
+        <p 
+            style="
+            cursor: pointer; 
+            display: inline-block;
+            font-size: 30px;
+            font-weight: bold;
+            margin:0;
+            display: flex;
+            align-items: center;
+            "
+        >
+            Aqua analytics
+        </p>
+        <div style="margin:0px 100px ;cursor: pointer; display: inline-block; font-size: 19px;">
+            <p style="cursor: pointer; display: inline-block; margin: 13px 0 13px 20px;" id="trangchu">
+                Trang chủ
+            </p>
+            <p style="cursor: pointer; display: inline-block;margin: 13px 0 13px 20px;" id="dulieu">
+                Dữ liệu
+            </p>
+            <p style="cursor: pointer; display: inline-block;margin: 13px 0 13px 20px;" id="giamsat">
+                Giám sát
+            </p>
+            <p style="cursor: pointer; display: inline-block;margin: 13px 0 13px 20px;" id="dangxuat">
+                Đăng xuất
+            </p>
+        </div>
+    </div>
+    <script>
+        const btn1 = document.querySelector("#trangchu");
+        btn1.addEventListener("click", (e) => {
+        e.preventDefault();
+            window.location.href = "index.html";
+        });
+        const btn2 = document.querySelector("#dulieu");
+        btn2.addEventListener("click", (e) => {
+        e.preventDefault();
+            window.location.href = "home.html";
+        });
+        const btn3= document.querySelector("#giamsat");
+        btn3.addEventListener("click", (e) => {
+        e.preventDefault();
+            window.location.href = "oversee.html";
+        });
+        const btn4 = document.querySelector("#dangxuat");
+        btn4.addEventListener("click", (e) => {
+        e.preventDefault();
+            window.location.href = "login.html";
+        });
+    </script>
+    <div style="height: 99vh;" >
+        <img src="./assets/db.jpg" alt="" style="width: 100%; height: 100%;">
+    </div>
+</div>
+
+</body>
+</html>
