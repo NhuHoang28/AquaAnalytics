@@ -58,7 +58,7 @@
     const btn2 = document.querySelector("#dulieu");
     btn2.addEventListener("click", (e) => {
     e.preventDefault();
-        window.location.href = "home.html";
+        window.location.href = "oversee.html";
     });
     const btn3= document.querySelector("#giamsat");
     btn3.addEventListener("click", (e) => {
@@ -367,7 +367,11 @@
 
             // Lấy ra 10 giá trị DO từ mảng records_for_chart
             for (var i = records_for_chart.length - 1; i >= 0; i--) {
-                data_for_chart_DO.push(records_for_chart[i]["uplink_message"].decoded_payload.DO);
+                try {
+                    data_for_chart_DO.push(records_for_chart[i]["uplink_message"].decoded_payload.DO);
+                } catch (error) {
+                    data_for_chart_DO.push(0);
+                }
                 horizontal_data.push(horizontal_data_value_DO);
             }
             var lineChartData = {
@@ -418,7 +422,11 @@
 
             // Lấy ra 10 giá trị ORP từ mảng records_for_chart
             for (var i = records_for_chart.length - 1; i >= 0; i--) {
-                data_for_chart_ORP.push(records_for_chart[i]["uplink_message"].decoded_payload.ORP);
+                try {
+                    data_for_chart_ORP.push(records_for_chart[i]["uplink_message"].decoded_payload.ORP);
+                } catch (error) {
+                    data_for_chart_ORP.push(0);
+                }
                 horizontal_data.push(horizontal_data_value_ORP);
             }
             var lineChartData = {
@@ -469,7 +477,11 @@
 
             // Lấy ra 10 giá trị T từ mảng records_for_chart
             for (var i = records_for_chart.length - 1; i >= 0; i--) {
-                data_for_chart_T.push(records_for_chart[i]["uplink_message"].decoded_payload.T);
+                try {
+                    data_for_chart_T.push(records_for_chart[i]["uplink_message"].decoded_payload.T);
+                } catch (error) {
+                    data_for_chart_T.push(0);
+                }
                 horizontal_data.push(horizontal_data_value_T);
             }
             var lineChartData = {
