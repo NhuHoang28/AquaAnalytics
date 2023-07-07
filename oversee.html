@@ -53,6 +53,22 @@
             </p>
         </div>
     </div>
+    <div style="position: relative; top: 100px; z-index: -100; margin: auto">
+        <table border="1" id="oversee_data">
+            <thead>
+                <th>STT</th>
+                <th>Time</th>
+                <th>ID ứng dụng</th>
+                <th>ID thiết bị</th>
+                <th>DO</th>
+                <th>ORP</th>
+                <th>T</th>
+                <th>RSSI</th>
+                <th>SNR</th>
+                <th>SF</th>
+            </thead>
+        </table>
+    </div>
     <script>
         const btn1 = document.querySelector("#trangchu");
         btn1.addEventListener("click", (e) => {
@@ -75,9 +91,122 @@
             window.location.href = "login.html";
         });
     </script>
-    <div style="height: 99vh;" >
-        oversee
-    </div>
+    
+    <!-- GET DATA FROM FIREBASE DATABASE -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyAEZQE-lRmp8vsYAAv6NMB9gVnTOiRn3fs",
+            authDomain: "test-14e86.firebaseapp.com",
+            databaseURL: "https://test-14e86-default-rtdb.firebaseio.com",
+            projectId: "test-14e86",
+            storageBucket: "test-14e86.appspot.com",
+            messagingSenderId: "448624890758",
+            appId: "1:448624890758:web:91131112cba47044775207"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script>
+        var database = firebase.database();
+        var ref = database.ref("/data")
+        var data_for_chart_DO = Array();
+        ref.on("value", function(snapshot) {
+            var data = snapshot.val();
+            allkeys = Object.keys(data);
+            lastRecord = allkeys[allkeys.length - 1];
+            
+            // Lưu 10 (hoặc toàn bộ nếu số bản ghi ít hơn 10) giá trị cuối cùng (mới nhất) vào mảng records_for_chart
+            var records_for_chart = Array()
+            for (var i = 0; i < 24 && i < allkeys.length; i++) {
+                records_for_chart.push(data[allkeys[allkeys.length - i-1]]);
+            }
+            
+            // Lưu 10 giá trị cuối cùng (mới nhất) vào mảng records_for_chart
+            data_for_chart_DO = Array();
+            horizontal_data = Array();
+
+            // Lấy ra 10 giá trị DO từ mảng records_for_chart
+            table = document.getElementById("oversee_data");
+            for (var i = records_for_chart.length - 1; i >= 0; i--) {
+                tr = "<tr><td>" + (records_for_chart.length - i) + "</td>";
+                // time
+                try {
+                    Time = records_for_chart[i].received_at;
+                } catch (error) {
+                    Time = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + Time + "</td>";
+                }
+                // application_id
+                try {
+                    application_id = records_for_chart[i].end_device_ids.application_ids.application_id;
+                } catch (error) {
+                    application_id = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + application_id + "</td>";
+                }
+                // device_id
+                try {
+                    device_id = records_for_chart[i].end_device_ids.device_id;
+                } catch (error) {
+                    device_id = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + device_id + "</td>";
+                }
+                // DO
+                try {
+                    DO = records_for_chart[i].uplink_message.decoded_payload.DO;
+                } catch (error) {
+                    DO = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + DO + "</td>";
+                }
+                // ORP
+                try {
+                    ORP = records_for_chart[i].uplink_message.decoded_payload.ORP;
+                } catch (error) {
+                    ORP = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + ORP + "</td>";
+                }
+                // T
+                try {
+                    T = records_for_chart[i].uplink_message.decoded_payload.T;
+                } catch (error) {
+                    T = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + T + "</td>";
+                }
+                // RSSI
+                try {
+                    RSSI = records_for_chart[i].uplink_message.rx_metadata["0"].rssi;
+                } catch (error) {
+                    RSSI = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + RSSI + "</td>";
+                }
+                // SNR
+                try {
+                    SNR = records_for_chart[i].uplink_message.rx_metadata["0"].snr;
+                } catch (error) {
+                    SNR = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + SNR + "</td>";
+                }
+                // SF
+                try {
+                    SF = records_for_chart[i].uplink_message.settings.data_rate.lora.spreading_factor;
+                } catch (error) {
+                    SF = "Không xác định định";
+                } finally {
+                    tr+= "<td>" + SF + "</td>";
+                }
+                tr+= "</tr>"
+                table.innerHTML += tr;
+            }
+        });
+    </script>
 </div>
 
 </body>
